@@ -19,8 +19,8 @@ class EquipmentType extends Model
      * Связь «элемент принадлежит» таблицы `equipment_types` с таблицей `equipment`
      * @return HasMany
      */
-    public function equipmentType(): HasMany
+    public function equipments(): HasMany
     {
-        return $this->hasMany(EquipmentType::class);
+        return $this->hasMany(Equipment::class);
     }
 }
