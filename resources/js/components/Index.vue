@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-        <h1 class="mb-4">Оборудования</h1>
+        <h1 class="mb-4">Оборудование</h1>
         <div v-if="successMessage" class="alert alert-success">
             {{ successMessage }}
         </div>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('equipment_type_id');
             $table->string('serial_number');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
