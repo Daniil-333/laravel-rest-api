@@ -75,6 +75,9 @@ class EquipmentSerialNumberMask implements DataAwareRule, ValidationRule
 
         //проверяем на уникальность составной индекс equipment_type_id + serial_number
         foreach ($this->equipments as $equipment) {
+            // исключаем из проверки редактируемую запись
+            if(!$isArray && $equipment['id'] == $this->data['id']) continue;
+
             if($value == $equipment['serial_number'] && $equipmentTypeId == $equipment['equipment_type_id']) {
                 $fail(trim(
                     ($isArray ? "$key|" : '') . "Такой серийный номер в связке с типом оборудования уже есть в системе"

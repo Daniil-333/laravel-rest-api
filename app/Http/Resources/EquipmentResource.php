@@ -15,14 +15,11 @@ class EquipmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'equipment_type_id' => $this->equipment_type_id,
-//            'equipment_type_id' => EquipmentResource::collection($this->equipmentType),
+            'equipment_type' => new EquipmentTypeResource($this->equipmentType),
             'serial_number' => $this->serial_number,
             'comment' => $this->comment,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
-
-//        return parent::toArray($request);
     }
 }

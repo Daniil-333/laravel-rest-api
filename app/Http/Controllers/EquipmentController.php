@@ -8,7 +8,6 @@ use App\Http\Resources\EquipmentTypeCollection;
 use App\Models\Equipment;
 use App\Models\EquipmentType;
 use App\Services\EquipmentService;
-use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -18,9 +17,21 @@ class EquipmentController extends Controller
     /**
      * Вывод пагинированного списка оборудования
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new EquipmentCollection(Equipment::paginate(3));
+        if ($request->has('search')) {
+            $search = trim(htmlspecialchars(strip_tags($request->input('search'))));
+        }
+
+        $equipments = Equipment::when(
+            isset($search),
+            fn ($q) => $q
+                ->where('serial_number', 'like', '%' . $search . '%')
+                ->orWhere('comment', 'LIKE', '%' . $search . '%')
+        )
+            ->paginate(3);
+
+        return new EquipmentCollection($equipments);
     }
 
     /**
