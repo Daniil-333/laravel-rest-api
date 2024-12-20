@@ -15,9 +15,7 @@ class EquipmentCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
-            ],
+            'links' => [],
         ];
     }
 }

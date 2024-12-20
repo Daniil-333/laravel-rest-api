@@ -37,7 +37,7 @@ abstract class EquipmentValidator
     {
         $this->data = Arr::exists($data, 'items') ? $data['items'] : $data;
         $this->equipmentTypes = EquipmentType::get()->keyBy('id')->toArray();
-        $this->equipments = Equipment::get()->keyBy('id')->toArray();
+        $this->equipments = Equipment::withTrashed()->get()->keyBy('id')->toArray();
 
         $this->validator = Validator::make(
             $data,
