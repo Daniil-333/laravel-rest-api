@@ -27,5 +27,10 @@ class DatabaseSeeder extends Seeder
             'title' => 'D-Link DIR-300 E',
             'mask' => 'NAAAAXZXXX',
         ]);
+
+        EquipmentType::factory()->create([
+            'title' => 'D-Link DIR-300 G',
+            'mask' => 'NXAAAXZXXX',
+        ]);
     }
 }

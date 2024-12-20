@@ -100,9 +100,21 @@ class EquipmentController extends Controller
     /**
      * Вывод пагинированного списка типов оборудования
      */
-    public function showTypes()
+    public function showTypes(Request $request)
     {
-        return new EquipmentTypeCollection(EquipmentType::paginate(3));
+        if ($request->has('search')) {
+            $search = trim(htmlspecialchars(strip_tags($request->input('search'))));
+        }
+
+        $equipmentTypes = EquipmentType::when(
+            isset($search),
+            fn ($q) => $q
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('mask', 'LIKE', '%' . $search . '%')
+        )
+            ->paginate(2);
+
+        return new EquipmentTypeCollection($equipmentTypes);
     }
 
     /**
